@@ -1,0 +1,8 @@
+---
+- name: install epel-release
+  yum: name=epel-release state=present
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version|int >= 6
+
+- name: Add EPEL repo file
+  yum: name={{ epel_release[ansible_distribution_major_version] }} state=present
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version|int == 5
